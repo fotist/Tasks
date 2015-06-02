@@ -7,6 +7,8 @@
 
 <html>
     <head>
+        <title>Login - Tasks</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta charset="utf8">
        <link type="text/css" href="css/style.css" rel="stylesheet">
        <link type="text/css" rel="stylesheet" href="bootstrap/css/bootstrap.css">

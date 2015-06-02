@@ -6,6 +6,8 @@
 ?>
 <html>
 <head>
+    <title>Delete Tasks - Tasks</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta charset="utf8">
        <link type="text/css" href="css/style.css" rel="stylesheet">
        <link type="text/css" rel="stylesheet" href="bootstrap/css/bootstrap.css">
@@ -100,10 +102,7 @@ if (isset($_POST['deletetask']) || isset($_GET['id']))
         <label for="end_date">End Date</label>
         <input class="form-control" name="end_date" readonly="readonly" value="<?php echo $fetcharray['end_date']; ?>" id="end_date" type="date"/>
     </div>
-                        <div class="form-group">
-        <label for="image">Image</label>
-        <input class="form-control" name="image" readonly="readonly" value="<?php echo $fetcharray['image']; ?>" id="image" type="file"/>
-    </div>
+                        
              
                     
     <input class="btn btn-danger btn-lg" type="submit" name="deleteconfirm" value="Delete Task"/>

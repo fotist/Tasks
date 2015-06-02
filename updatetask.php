@@ -6,6 +6,8 @@
 ?>
 <html>
 <head>
+    <title>Update Tasks - Tasks</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta charset="utf8">
        
        <link type="text/css" rel="stylesheet" href="bootstrap/css/bootstrap.css">
@@ -85,7 +87,7 @@ if (isset($_POST['updatetask']) || isset($_GET['id']))
     else
     {
         ?>
-                    <form role="form" method="POST" action="" id="change">
+                    <form role="form" method="POST" action="" id="change" enctype="multipart/form-data">
                         <h1>Update Task</h1><br>
                         <div class="form-group">
         <label for="id">ID</label>
@@ -93,24 +95,24 @@ if (isset($_POST['updatetask']) || isset($_GET['id']))
     </div>
                      <div class="form-group">
         <label for="title">Title</label>
-        <input class="form-control" name="title" id="title" value="<?php echo $fetcharray['title']; ?>" placeholder="Enter the task's title" type="text"/>
+        <input class="form-control" name="title" id="title" required="required" value="<?php echo $fetcharray['title']; ?>" placeholder="Enter the task's title" type="text"/>
     </div>
                     <div class="form-group">
         <label for="description">Description</label>
-        <textarea rows='4' class="form-control" name="description" id="description" placeholder="Enter Task's Description" ><?php echo $fetcharray['description']; ?></textarea>
+        <textarea rows='4' class="form-control" name="description" required="required" id="description" placeholder="Enter Task's Description" ><?php echo $fetcharray['description']; ?></textarea>
     </div>
                     
     <div class="form-group">
         <label for="start_date">Start Date</label>
-        <input class="form-control" name="start_date" value="<?php echo $fetcharray['start_date']; ?>" id="start_date"  type="date"/>
+        <input class="form-control" name="start_date"  required="required" value="<?php echo $fetcharray['start_date']; ?>" id="start_date"  type="date"/>
     </div>
     <div class="form-group">
         <label for="end_date">End Date</label>
-        <input class="form-control" name="end_date" value="<?php echo $fetcharray['end_date']; ?>" id="end_date" type="date"/>
+        <input class="form-control" name="end_date" required="required" value="<?php echo $fetcharray['end_date']; ?>" id="end_date" type="date"/>
     </div>
                         <div class="form-group">
         <label for="image">Image</label>
-        <input class="form-control" name="image" value="<?php echo $fetcharray['image']; ?>" id="image" type="file"/>
+        <input class="form-control" name="image" required="required" value="<?php echo $fetcharray['image']; ?>" id="image" type="file"/>
     </div>
                         
         
@@ -147,14 +149,48 @@ if (isset($_POST['updateconfirm']))
     $title = test_input($title);
     $description = $_POST['description'];
     $description = test_input($description);
-    $path="images/".$_FILES['image']['name'];
-    move_uploaded_file($_FILES['photo']['tmp_name'],$path);
+    //upload image
+    $path="images/task/";
+   
+$target_file = $path . basename($_FILES["image"]["name"]);
+$uploadOk = 1;
+$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+
+    $check = getimagesize($_FILES["image"]["tmp_name"]);
+    if($check !== false) {
+        $uploadOk = 1;
+    } else {
+        die ("File is not an image.");
+        $uploadOk = 0;
+    }
+
+
+if (file_exists($target_file)) {
+    die ("Sorry, file already exists.");
+    $uploadOk = 0;
+}
+
+
+
+if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+&& $imageFileType != "gif" ) {
+    die ("Sorry, only JPG, JPEG, PNG & GIF files are allowed.");
+    $uploadOk = 0;
+}
+
+if ($uploadOk == 0) {
+    die ("Sorry, your file was not uploaded.");
+} else {
+    if (!move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+        die ("Sorry, there was an error uploading your file.");
+    } 
+}
     $start_date = $_POST['start_date'];
     $end_date = $_POST['end_date'];
     $completed = $_POST['completed'];
     $date = date('Y-m-d H:i:s');
     
-    $updatetask = "UPDATE tasks SET title='$title', description='$description', image='$path', start_date='$start_date', end_date='$end_date', create_date='$date' where id LIKE '$id' ";
+    $updatetask = "UPDATE tasks SET title='$title', description='$description', image='$target_file', start_date='$start_date', end_date='$end_date', create_date='$date' where id LIKE '$id' ";
             
     $updaterun = mysql_query($updatetask);
     
@@ -179,20 +215,25 @@ if (isset($_POST['updateconfirm']))
         $id = $_POST['id'];
         if (isset($_GET['completed']))
                 $id = $_GET['completed'];
+        $gettask = mysql_query("SELECT t.id,t.title,t.description,t.start_date,t.end_date,t.image,t.user_id,m.fullname FROM tasks as t, members as m where t.id = '$id' AND t.user_id = m.id");
+        $gettaskarray = mysql_fetch_assoc($gettask);
+        if (!$gettask)
+            echo 'error';
         $complete = "UPDATE tasks SET  completed='$completed' WHERE id LIKE '$id'";
         $completerun = mysql_query($complete);
         
         echo "Congratulations the task has been completed";
-            $to = "dallas@9am.gr";
-                $subject = "Mini Project";
-                $message = "The task with the title '".$title."' has been completed.<br><br>"
+            $to = "fotis.tsotras@gmail.com";
+                $subject = "User ".$gettaskarray['fullname']." has completed the Task #".$gettaskarray['id'];
+                $message = "The task with the title '".$gettaskarray['title']."' has been completed.<br><br>"
                         . "<b><i>Task's Details</i></b><br>"
-                        . "<b>Id</b>: ".$id."<br>"
-                        . "<b>Title</b>: ".$title."<br>"
-                        . "<b>Description</b>: ".$description."<br>"
-                        . "<b>Image link</b>: ".$image."<br>"
-                        . "<b>Start Date</b> : ".$start_date."<br>"
-                        . "<b>End Date</b> : ".$end_date."<br><br>"
+                        . "<b>Id</b>: ".$gettaskarray['id']."<br>"
+                        . "<b>Title</b>: ".$gettaskarray['title']."<br>"
+                        . "<b>Description</b>: ".$gettaskarray['description']."<br>"
+                        . "<b>Image link</b>: ".$gettaskarray['image']."<br>"
+                        . "<b>Start Date</b> : ".$gettaskarray['start_date']."<br>"
+                        . "<b>End Date</b> : ".$gettaskarray['end_date']."<br>"
+                        . "<b>User</b> : ".$gettaskarray['fullname']."<br><br>"
                         . "This e-mail was sent by Fotis Tsotras's Mini Project.";
                 
                         
