@@ -223,7 +223,7 @@ if ($uploadOk == 0) {
         $completerun = mysql_query($complete);
         
         echo "Congratulations the task has been completed";
-            $to = "fotis.tsotras@gmail.com";
+            $to = "dallas@9am.gr";
                 $subject = "User ".$gettaskarray['fullname']." has completed the Task #".$gettaskarray['id'];
                 $message = "The task with the title '".$gettaskarray['title']."' has been completed.<br><br>"
                         . "<b><i>Task's Details</i></b><br>"
