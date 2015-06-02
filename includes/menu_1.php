@@ -50,7 +50,7 @@
     else
     { echo "Welcome <b><i>".$_SESSION['FULLNAME']."</i></b>"; ?>
     <a class="btn btn-success btn-sm" href="http://localhost/Tasks/logout.php">Sign Out</a>
-    <script>document.getElementById("ul-login").style.padding = "0px 0px 0px 500px";</script>
+    
     <?php
     }?>
     

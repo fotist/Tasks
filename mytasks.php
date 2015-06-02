@@ -6,7 +6,7 @@ $tasksrun = mysql_query($tasks);
 $tasksrows = mysql_num_rows($tasksrun);
 if (!$tasksrows>0)
     {
-    echo "Your tasks list is empty. Click here to create one.";
+    echo "Your tasks list is empty. Click <a href='newtask.php'>here</a> to create one.";
     }
     
  else {

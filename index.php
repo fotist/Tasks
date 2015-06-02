@@ -43,10 +43,10 @@
                     "sExtends": "text",
                     "sButtonText": "New Task",
                     "fnClick": function( nButton, oConfig ) {
-			
-                    popup('createtask');
-                        
-                       
+			if($(window).width()<800)
+                       window.location = "newtask.php";
+                        else
+                       popup('createtask');
                         
 		}
                     
