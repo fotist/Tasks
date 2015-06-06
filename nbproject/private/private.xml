@@ -3,18 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/Tasks/includes/menu_1.php</file>
             <file>file:/C:/xampp/htdocs/Tasks/index.php</file>
-            <file>file:/C:/xampp/htdocs/Tasks/js/css-pop.js</file>
+            <file>file:/C:/xampp/htdocs/Tasks/register.php</file>
+            <file>file:/C:/xampp/htdocs/Tasks/newtask.php</file>
+            <file>file:/C:/xampp/htdocs/Tasks/css/style.css</file>
+            <file>file:/C:/xampp/htdocs/Tasks/deletetask.php</file>
+            <file>file:/C:/xampp/htdocs/Tasks/logout.php</file>
+            <file>file:/C:/xampp/htdocs/Tasks/includes/menu_1.php</file>
+            <file>file:/C:/xampp/htdocs/Tasks/forms/createtask.php</file>
             <file>file:/C:/xampp/htdocs/Tasks/updatetask.php</file>
             <file>file:/C:/xampp/htdocs/Tasks/contact.php</file>
+            <file>file:/C:/xampp/htdocs/Tasks/mytasks.php</file>
             <file>file:/C:/xampp/htdocs/Tasks/login.php</file>
-            <file>file:/C:/xampp/htdocs/Tasks/register.php</file>
+            <file>file:/C:/xampp/htdocs/Tasks/tasks.php</file>
             <file>file:/C:/xampp/htdocs/Tasks/includes/escape.php</file>
-            <file>file:/C:/xampp/htdocs/Tasks/newtask.php</file>
             <file>file:/C:/xampp/htdocs/Tasks/includes/guest.php</file>
-            <file>file:/C:/xampp/htdocs/Tasks/css/style2.css</file>
-            <file>file:/C:/xampp/htdocs/Tasks/deletetask.php</file>
         </group>
     </open-files>
 </project-private>

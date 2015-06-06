@@ -55,9 +55,11 @@ if (isset($_POST['register']))
     
     $username = $_POST['username'];
     $username = test_input($username);
-    $usercheck = mysql_query("SELECT username FROM members where username LIKE '$usercheck'");
+    
+    $usercheck = mysql_query("SELECT username FROM members where username LIKE '$username'");
     $usercheckrows = mysql_num_rows($usercheck);
-    if ($usercheck = 1)
+    
+    if ($usercheckrows == 1)
     {
             die("<h2>There is already a member with the submited username.</h2>");
     }
